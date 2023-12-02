@@ -63,8 +63,6 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-toBlob/1.0.0/canvas-toBlob.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
   <div id="coupon">
@@ -72,7 +70,7 @@
     <img id="coupon-img" src="" alt="쿠폰 이미지">
     <h2 id="coupon-date"></h2>
   </div>
-  <button onclick="downloadCoupon()">다운로드</button>
+
 
   <script>
     window.onload = function() {
@@ -97,18 +95,34 @@
         'img/bible5.png',
       ];
 
-      // 랜덤으로 이미지를 선택하여 src 속성에 설정합니다.
-      var randomImage = images[Math.floor(Math.random() * images.length)];
-      document.getElementById('coupon-img').src = randomImage;
+    // 랜덤으로 이미지를 선택하여 src 속성에 설정합니다.
+    var randomImage = images[Math.floor(Math.random() * images.length)];
+    document.getElementById('coupon-img').src = randomImage;
 
-    function downloadCoupon() {
-        var coupon = document.getElementById('coupon');
-        html2canvas(coupon).then(function(canvas) {
-        canvas.toBlob(function(blob) {
-          saveAs(blob, 'coupon.png');
-        });
+    //0.1초 대기
+    setTimeout(function() {
+      var coupon = document.getElementById('coupon');
+      html2canvas(coupon).then(function(canvas) {
+      var imgURL = canvas.toDataURL("image/png");
+      var img = document.createElement("img");
+      img.src = imgURL;
+      document.body.appendChild(img);
+      coupon.style.display = 'none'; // hide the original div
+
+      var description = document.createElement("div");
+      // 파란색 글씨
+      description.style.color = "blue";
+      description.style.padding = "10px";
+      description.innerHTML = "쿠폰 꾹 눌러서 다운 받기";
+      document.body.appendChild(description);
+
       });
-    }
+    }, 100);
+
+
+  
+    
+
   </script>
 </body>
 </html>

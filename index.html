@@ -40,6 +40,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+      border: #999;
     }
 
     .coupon-input-group label {
@@ -99,6 +100,10 @@
       
       if (!date) {
         date = new Date();
+      }
+
+      if (!couponType) {
+        couponType = 'Lullu 쿠폰';
       }
 
       localStorage.setItem('date', date);
