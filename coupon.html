@@ -62,7 +62,9 @@
       object-fit: cover;
     }
   </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
 </head>
 <body>
   <div id="coupon">
@@ -74,6 +76,7 @@
 
   <script>
     window.onload = function() {
+
       var date = localStorage.getItem('date');
       var couponType = localStorage.getItem('couponType');
 
@@ -84,45 +87,45 @@
       expiryDate.setMonth(expiryDate.getMonth() + 1);
 
       document.getElementById('coupon-date').innerText =  issueDate.toLocaleDateString() + ' ~ ' + expiryDate.toLocaleDateString();
-    };
-
-    // 이미지 URL들을 배열에 저장합니다.
-    var images = [
+      
+      // 이미지 URL들을 배열에 저장합니다.
+      var images = [
         'img/bible1.png',
         'img/bible2.png',
         'img/bible3.png',
         'img/bible4.png',
         'img/bible5.png',
       ];
-
-    // 랜덤으로 이미지를 선택하여 src 속성에 설정합니다.
-    var randomImage = images[Math.floor(Math.random() * images.length)];
-    document.getElementById('coupon-img').src = randomImage;
-
-    //0.1초 대기
-    setTimeout(function() {
-      var coupon = document.getElementById('coupon');
-      html2canvas(coupon).then(function(canvas) {
-      var imgURL = canvas.toDataURL("image/png");
-      var img = document.createElement("img");
-      img.src = imgURL;
-      document.body.appendChild(img);
-      coupon.style.display = 'none'; // hide the original div
-
-      var description = document.createElement("div");
-      // 파란색 글씨
-      description.style.color = "blue";
-      description.style.padding = "10px";
-      description.innerHTML = "쿠폰 꾹 눌러서 다운 받기";
-      document.body.appendChild(description);
-
-      });
-    }, 100);
-
-
-  
-    
-
+      
+      // 랜덤으로 이미지를 선택하여 src 속성에 설정합니다.
+      var randomImage = images[Math.floor(Math.random() * images.length)];
+      document.getElementById('coupon-img').src = randomImage;
+      
+      //0.1초 대기
+      setTimeout(function() {
+        var coupon = document.getElementById('coupon');
+        html2canvas(coupon).then(function(canvas) {
+          var imgURL = canvas.toDataURL("image/png");
+          var img = document.createElement("img");
+          img.src = imgURL;
+          document.body.appendChild(img);
+          coupon.style.display = 'none'; // hide the original div
+          
+          // 파란색 글씨
+          var description = document.createElement("div");
+          description.style.color = "blue";
+          description.style.padding = "10px";
+          description.innerHTML = "쿠폰 꾹 눌러서 다운 받기";
+          document.body.appendChild(description);
+          
+        });
+      }, 100);
+      
+      
+    };
+      
+      
+      
   </script>
 </body>
 </html>
