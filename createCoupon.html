@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      flex-direction: column;
+    }
+
+    #coupon-creation {
+      width: 320px;
+      height: 200px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    #coupon-creation h2 {
+      margin-bottom: 20px;
+    }
+
+    .coupon-input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .coupon-input-group label {
+      font-weight: bold;
+    }
+
+    .coupon-input {
+      margin: 0;
+      font-size: 16px;
+      text-align: center;
+      width: 60%;
+      border: none;
+      border-bottom: 1px solid #999;
+    }
+
+    button {
+      display: block;
+      padding: 10px 20px;
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  
+</head>
+<body>
+  <div id="coupon-creation">
+    <h2>쿠폰 생성</h2>
+    <div class="coupon-input-group">
+      <label for="coupon-type-input">쿠폰 종류:</label>
+      <input id="coupon-type-input" class="coupon-input" type="text">
+    </div>
+    <div class="coupon-input-group">
+      <label for="coupon-date-input">쿠폰 발행일:</label>
+      <input id="coupon-date-input" class="coupon-input" type="date">
+    </div>
+  </div>
+  <button onclick="createCoupon()">쿠폰 생성</button>
+
+  <script>
+    function createCoupon() {
+      var couponType = document.getElementById('coupon-type-input').value;
+      var date = document.getElementById('coupon-date-input').value;
+      
+      if (!date) {
+        date = new Date();
+      }
+
+      localStorage.setItem('date', date);
+      localStorage.setItem('couponType', couponType);
+
+      window.location.href = 'coupon.html';
+    }
+  </script>
+</body>
+</html>
